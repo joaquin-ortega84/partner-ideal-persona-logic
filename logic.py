@@ -52,12 +52,13 @@ PERSONA_KEYWORDS = {
         "alianzas", "ecosystem partnerships", "strategic deals",
         "business relationship", "strategic relationship",
         "strategic supplier relationship management", "partner ecosystem",
-        "global offering", "global portfolio",
+        "global offering", "global portfolio", "group offering", "group proposition", "workplace offering"
+
     ],
     "Client Sales": [
-        "services sales", "strategic accounts", "strategic clients",
+        "services sales", "strategic accounts", "strategic clients", "business development",
         "large deals", "client executive", "client director", "client management",
-        "account delivery", "account executive", "account management partner",
+        "account delivery", "account executive", "account management partner", "key account"
         "client management executive", "client experience executive",
         "client relationship", "client services", "client solutions",
         "client partner", "sales executive", "strategic client", "solutions account",
@@ -67,7 +68,7 @@ PERSONA_KEYWORDS = {
         "strategic account manager", "customer acquisition",
         "desarrollo de negocios", "director comercial", "negocio",
         "ejecutivo de cuentas", "gerente de cuentas", "gerente de negocio",
-        "solution offering architect", "deal architect"
+        "solution offering architect", "deal architect", "service architect"
     ],
     "Delivery": [
         "delivery", "service delivery", "service management", "service desk", "end user services",
@@ -76,8 +77,9 @@ PERSONA_KEYWORDS = {
         "platforms", "application delivery", "architecture",
         "customer success", "delivery director", "delivery operations",
         "enterprise and solution architecture", "it service", "itsm service", "cloud service",
-        "services and solution", "transformacion", "transformation",
-        "transformation programs", "solution architect", "enterprise architect",
+        "services and solution", "transformacion", "transformation", "architecture",
+        "transformation programs", "solution architect", "enterprise architect", "architect modern workplace", "workspace architect", "chief architect", "delivery architect",
+        "portfolio architect", "pre sales architect", "service delivery executive",
     ],
 }
 
@@ -94,7 +96,8 @@ EXCLUSION_KEYWORDS = [
     "executive assistant",
     "sales operations",
     "financial services",
-    "sales & markeing", "sales and marketing"
+    "sales & markeing", "sales and marketing", "customer success",
+    "product manager"
 ]
 
 # ---------------------------------------------------------------------------
@@ -130,7 +133,7 @@ PERSONA_JOB_LEVELS = {
         "Senior Manager", "Manager", "Entry Level",
     },
     "Delivery": {
-        "Executive", "Vice President", "Senior Director", "Director", "Senior Manager"
+        "Executive", "Vice President", "Senior Director", "Director", "Senior Manager", "Manager"
     },
 }
 
@@ -142,9 +145,18 @@ PERSONA_JOB_LEVELS = {
 # "Sales Manager" or "Account Director" title shouldn't qualify unless the
 # title itself says "executive" (e.g. "Sales Executive", "Account Executive").
 EXTRA_TITLE_REQUIREMENT = {
-    ("Client Sales", "Entry Level"): "executive",
+    ("Client Sales", "Entry Level"): ["executive", "manager"],
+    ("Delivery", "Senior Manager"): [
+        "architecture", "transformation", "experience delivery", "euc",
+        "principal architect", "principal solutions owner", "experience",
+        "modern workplace", "service desk", "architecture"
+    ],
+    ("Delivery", "Manager"): [
+        "architecture", "experience delivery", "euc",
+        "principal architect", "principal solutions owner", "experience",
+        "modern workplace", "service desk", "architecture"
+    ],
 }
-
 
 def normalize_job_level(raw_level) -> str:
     """Map a raw Job Level string to one of the 7 canonical tiers, or 'Unknown'."""
@@ -207,8 +219,8 @@ def tag_contact(title, raw_job_level) -> tuple:
         if not title_matches(title, persona) or level not in PERSONA_JOB_LEVELS[persona]:
             continue
 
-        required_word = EXTRA_TITLE_REQUIREMENT.get((persona, level))
-        if required_word and not title_contains_word(title, required_word):
+        required_words = EXTRA_TITLE_REQUIREMENT.get((persona, level))
+        if required_words and not any(title_contains_word(title, w) for w in required_words):
             continue
 
         return persona, True
