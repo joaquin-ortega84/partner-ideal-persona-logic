@@ -53,15 +53,17 @@ PERSONA_KEYWORDS = {
         "partnership", "partnerships", "partner development", "partner management",
         "ecosystem partnerships", "partner ecosystem",
         # Strategy & Offering & Portfolio
-        "managed services", "strategic relationship", "relationship",
-        "portfolio", "offering"
+        "managed services", "strategic relationship", "relationship", "it strategy",
+        "portfolio", "offering", "stategy and innovation"
         # Transformation
         "transformation", "transformacion",
+        # Infrastruture
+        "managed infrastructure services"
 
     ],
     "Client Sales": [
         # Account management
-        "account manager", "account management partner", "key account",
+        "account manager", "account management partner", "key account", "account director"
         "strategic account", "major account", "account delivery",
         "account sales", "sales account", "solutions account", "gerente de cuentas",
 
@@ -73,36 +75,37 @@ PERSONA_KEYWORDS = {
         # Sales execution
         "account executive", "sales executive", "strategic sales", "services sales",
         "enterprise solutions sales", "large deal", "customer acquisition",
-        "ejecutivo de cuentas",
+        "ejecutivo de cuentas", "head of sales", "new business", "presales", "pre sales"
 
         # Business development
         "business development", "director comercial", "negocio",
 
         # Solution / deal architecture
         "solution offering architect", "solution architect", "deal architect",
-        "service architect", "chief architect", "dex architect", "modern workplace architect",
-        "workplace architect", "euc architect", "it architect",
+        "service architect", "chief architect", "cheif architect", "dex architect", "modern workplace architect",
+        "workplace architect", "euc architect", "it architect", "technical architect"
     ],
 
     "Delivery": [
-          # Delivery (covers service delivery, client delivery, application delivery,
+        # Delivery (covers service delivery, client delivery, application delivery,
         # delivery director, delivery operations, delivery architect, etc.)
         "delivery",
 
         # Service management & operations
         "service management", "service desk", "it service", "itsm service",
-        "solution service", "services and solution", "operational excellence", "global services",
+        "solution service", "services and solution", "operational excellence", "global services", "dsi", "informatique"
 
         # Workplace / end user
         "end user services", "workplace services", "digital workplace", "workspace", "end point", "endpoint",
-        "end user devices", "end user computing", "digital experience", "workplace", "dex", "euc", "eus"
+        "end user devices", "end user computing", "digital experience", "workplace", "dex", "euc", "eus", "compute", "computing",
+        "eux", "dwp", "dws", "emplyee experience", "user experience", "post de travail",
 
         # Platforms & cloud
         "platform", "cloud service",
 
         # Architecture
         "architecture", "solution architect", "enterprise architect", "chief architect",
-        "portfolio architect", "pre sales architect", "architect modern workplace"
+        "portfolio architect", "pre sales architect", "architect modern workplace", "dex architect"
     ]
 }
 
@@ -121,7 +124,8 @@ EXCLUSION_KEYWORDS = [
     "financial services",
     "sales & markeing", "sales and marketing", "customer success",
     "product manager",
-    "inside sales", "junior manager", "junior executive"
+    "inside sales", "junior manager", "junior executive",
+
 ]
 
 # ---------------------------------------------------------------------------
@@ -169,7 +173,7 @@ PERSONA_JOB_LEVELS = {
 # "Sales Manager" or "Account Director" title shouldn't qualify unless the
 # title itself says "executive" (e.g. "Sales Executive", "Account Executive").
 EXTRA_TITLE_REQUIREMENT = {
-    ("Client Sales", "Entry Level"): ["executive"],
+    ("Client Sales", "Entry Level"): ["executive", "exec"],
     ("Delivery", "Senior Manager"): [
         "architecture", "transformation", "experience delivery", "euc",
         "principal architect", "principal solutions owner", "experience",
