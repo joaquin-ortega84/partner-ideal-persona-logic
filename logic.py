@@ -46,41 +46,64 @@ import pandas as pd
 
 PERSONA_KEYWORDS = {
     "Partner Relationship": [
-        "managing director it", "managing director digital workplace",
-        "partnership", "partnerships", "alliance",
-        "alliances", "partner development", "partner management",
-        "alianzas", "ecosystem partnerships", "strategic deals",
-        "business relationship", "strategic relationship",
-        "strategic supplier relationship management", "partner ecosystem",
-        "global offering", "global portfolio", "group offering", "group proposition", "workplace offering"
+        # Managing Director
+        "managing director", "managing director it", "managing director digital workplace",
+        # Alliance & Partnership & Relationship & Ecosystem
+        "alliance", "alliances","alianzas",
+        "partnership", "partnerships", "partner development", "partner management",
+        "ecosystem partnerships", "partner ecosystem",
+        # Strategy & Offering & Portfolio
+        "managed services", "strategic relationship", "relationship",
+        "portfolio", "offering"
+        # Transformation
+        "transformation", "transformacion",
 
     ],
     "Client Sales": [
-        "services sales", "strategic accounts", "strategic clients", "business development",
-        "large deals", "client executive", "client director", "client management",
-        "account delivery", "account executive", "account management partner", "key account"
-        "client management executive", "client experience executive",
-        "client relationship", "client services", "client solutions",
-        "client partner", "sales executive", "strategic client", "solutions account",
-        "account manager", "account sales", "enterprise business development",
-        "enterprise solutions sales", "major accounts",
-        "principal client executive", "sales account",
-        "strategic account manager", "customer acquisition",
-        "desarrollo de negocios", "director comercial", "negocio",
-        "ejecutivo de cuentas", "gerente de cuentas", "gerente de negocio",
-        "solution offering architect", "deal architect", "service architect"
+        # Account management
+        "account manager", "account management partner", "key account",
+        "strategic account", "major account", "account delivery",
+        "account sales", "sales account", "solutions account", "gerente de cuentas",
+
+        # Client management
+        "client executive", "client director", "client partner", "client management",
+        "client experience executive", "client relationship", "client services",
+        "client solutions", "strategic client",
+
+        # Sales execution
+        "account executive", "sales executive", "strategic sales", "services sales",
+        "enterprise solutions sales", "large deal", "customer acquisition",
+        "ejecutivo de cuentas",
+
+        # Business development
+        "business development", "director comercial", "negocio",
+
+        # Solution / deal architecture
+        "solution offering architect", "solution architect", "deal architect",
+        "service architect", "chief architect", "dex architect", "modern workplace architect",
+        "workplace architect", "euc architect", "it architect",
     ],
+
     "Delivery": [
-        "delivery", "service delivery", "service management", "service desk", "end user services",
-        "workplace services", "digital workpace", "delivery service",
-        "client delivery", "operational excellence", "platform services", "solution service",
-        "platforms", "application delivery", "architecture",
-        "customer success", "delivery director", "delivery operations",
-        "enterprise and solution architecture", "it service", "itsm service", "cloud service",
-        "services and solution", "transformacion", "transformation", "architecture",
-        "transformation programs", "solution architect", "enterprise architect", "architect modern workplace", "workspace architect", "chief architect", "delivery architect",
-        "portfolio architect", "pre sales architect", "service delivery executive",
-    ],
+          # Delivery (covers service delivery, client delivery, application delivery,
+        # delivery director, delivery operations, delivery architect, etc.)
+        "delivery",
+
+        # Service management & operations
+        "service management", "service desk", "it service", "itsm service",
+        "solution service", "services and solution", "operational excellence", "global services",
+
+        # Workplace / end user
+        "end user services", "workplace services", "digital workplace", "workspace", "end point", "endpoint",
+        "end user devices", "end user computing", "digital experience", "workplace", "dex", "euc", "eus"
+
+        # Platforms & cloud
+        "platform", "cloud service",
+
+        # Architecture
+        "architecture", "solution architect", "enterprise architect", "chief architect",
+        "portfolio architect", "pre sales architect", "architect modern workplace"
+    ]
 }
 
 # Priority used when a title matches keywords for more than one persona.
@@ -97,7 +120,8 @@ EXCLUSION_KEYWORDS = [
     "sales operations",
     "financial services",
     "sales & markeing", "sales and marketing", "customer success",
-    "product manager"
+    "product manager",
+    "inside sales", "junior manager", "junior executive"
 ]
 
 # ---------------------------------------------------------------------------
@@ -126,7 +150,7 @@ LEVEL_ALIASES = {
 PERSONA_JOB_LEVELS = {
     "Partner Relationship": {
         "Executive", "Vice President", "Senior Director", "Director",
-        "Senior Manager",
+        "Senior Manager", "Manager"
     },
     "Client Sales": {
         "Executive", "Vice President", "Senior Director", "Director",
@@ -145,7 +169,7 @@ PERSONA_JOB_LEVELS = {
 # "Sales Manager" or "Account Director" title shouldn't qualify unless the
 # title itself says "executive" (e.g. "Sales Executive", "Account Executive").
 EXTRA_TITLE_REQUIREMENT = {
-    ("Client Sales", "Entry Level"): ["executive", "manager"],
+    ("Client Sales", "Entry Level"): ["executive"],
     ("Delivery", "Senior Manager"): [
         "architecture", "transformation", "experience delivery", "euc",
         "principal architect", "principal solutions owner", "experience",
