@@ -25,7 +25,7 @@ Qualifying levels per persona
                           Director, Senior Manager, Manager
   Client Sales         : Executive, Vice President, Senior Director,
                           Director, Senior Manager, Manager, Entry Level
-  Delivery            : Executive, Vice President, Senior Director, Director
+  Delivery            : Executive, Vice President, Senior Director, Director, Senior Manager, Manager, Entry Level
 
 (Adjust PERSONA_JOB_LEVELS below if any of these should be different.)
 
@@ -98,7 +98,7 @@ PERSONA_KEYWORDS = {
         # Workplace / end user
         "end user services", "workplace services", "digital workplace", "workspace", "end point", "endpoint",
         "end user devices", "end user computing", "digital experience", "workplace", "dex", "euc", "eus", "compute", "computing",
-        "eux", "dwp", "dws", "emplyee experience", "user experience", "post de travail",
+        "eux", "dwp", "dws", "employee experience", "user experience", "post de travail",
 
         # Platforms & cloud
         "platform", "cloud service",
