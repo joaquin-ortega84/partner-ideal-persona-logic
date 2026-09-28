@@ -5,14 +5,14 @@ Partner Ideal Persona Tagger (simplified)
 Adds two columns to a contacts dataframe:
 
   - "Partner Ideal Persona"  -> True / False
-  - "Persona Type"           -> "Partner Relationship" | "Client Sales" | "Delivery" | ""
+  - "Persona Type"           -> "Strategy & Alliance" | "Client Sales" | "Delivery" | ""
 
 A contact is tagged True for a persona when BOTH are true:
   (a) their Title contains at least one of that persona's keywords, and
   (b) their Job Level is one of that persona's qualifying levels.
 
 If a title matches keywords for more than one persona, the persona is chosen
-by priority: Partner Relationship > Client Sales > Delivery.
+by priority: Strategy & Alliance > Client Sales > Delivery.
 
 Job Level model (7 canonical tiers)
 ------------------------------------
@@ -21,11 +21,11 @@ Manager, Entry Level (Individual Contributor)
 
 Qualifying levels per persona
 ------------------------------
-  Partner Relationship : Executive, Vice President, Senior Director,
-                          Director, Senior Manager, Manager
+  Strategy & Alliance : Executive, Vice President, Senior Director,
+                          Director
   Client Sales         : Executive, Vice President, Senior Director,
                           Director, Senior Manager, Manager, Entry Level
-  Delivery            : Executive, Vice President, Senior Director, Director, Senior Manager, Manager, Entry Level
+  Delivery            : Executive, Vice President, Senior Director, Director, Entry Level
 
 (Adjust PERSONA_JOB_LEVELS below if any of these should be different.)
 
@@ -45,7 +45,7 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 
 PERSONA_KEYWORDS = {
-    "Partner Relationship": [
+    "Strategy & Alliance": [
         # Managing Director
         "managing director", "managing director it", "managing director digital workplace",
         # Alliance & Partnership & Relationship & Ecosystem
@@ -89,11 +89,17 @@ PERSONA_KEYWORDS = {
     "Delivery": [
         # Delivery (covers service delivery, client delivery, application delivery,
         # delivery director, delivery operations, delivery architect, etc.)
+
+        # IT
+        "it", "information technology",
+
+        # Delivery
         "delivery",
 
         # Service management & operations
         "service management", "service desk", "it service", "itsm service",
-        "solution service", "services and solution", "operational excellence", "global services", "dsi", "informatique"
+        "solution service", "services and solution", "operational excellence", "global services", "global service", "service delivery",
+        "dsi", "informatique",
 
         # Workplace / end user
         "end user services", "workplace services", "digital workplace", "workspace", "end point", "endpoint",
@@ -101,7 +107,7 @@ PERSONA_KEYWORDS = {
         "eux", "dwp", "dws", "employee experience", "user experience", "post de travail",
 
         # Platforms & cloud
-        "platform", "cloud service",
+        "platform",
 
         # Architecture
         "architecture", "solution architect", "enterprise architect", "chief architect",
@@ -110,7 +116,7 @@ PERSONA_KEYWORDS = {
 }
 
 # Priority used when a title matches keywords for more than one persona.
-PERSONA_PRIORITY = ["Partner Relationship", "Client Sales", "Delivery"]
+PERSONA_PRIORITY = ["Strategy & Alliance", "Client Sales", "Delivery"]
 
 # Titles containing any of these phrases are never tagged as an Ideal
 # Persona, regardless of persona keyword / job level matches (e.g. an
@@ -125,6 +131,9 @@ EXCLUSION_KEYWORDS = [
     "sales & markeing", "sales and marketing", "customer success",
     "product manager",
     "inside sales", "junior manager", "junior executive",
+    "erp", "inside",
+    "merchandising",
+    "security presales", "data center", "agent", "admin", "technician", "supervisor", "coordinator", "professional", "specialist"
 
 ]
 
@@ -148,11 +157,10 @@ LEVEL_ALIASES = {
     "entry level": "Entry Level",
     "individual contributor": "Entry Level",
     "ic": "Entry Level",
-    "consultant": "Entry Level",
 }
 
 PERSONA_JOB_LEVELS = {
-    "Partner Relationship": {
+    "Strategy & Alliance": {
         "Executive", "Vice President", "Senior Director", "Director",
         "Senior Manager", "Manager"
     },
@@ -161,7 +169,7 @@ PERSONA_JOB_LEVELS = {
         "Senior Manager", "Manager", "Entry Level",
     },
     "Delivery": {
-        "Executive", "Vice President", "Senior Director", "Director", "Senior Manager", "Manager"
+        "Executive", "Vice President", "Senior Director", "Director", "Entry Level"
     },
 }
 
@@ -175,15 +183,15 @@ PERSONA_JOB_LEVELS = {
 EXTRA_TITLE_REQUIREMENT = {
     ("Client Sales", "Entry Level"): ["executive", "exec"],
     ("Delivery", "Senior Manager"): [
-        "architecture", "transformation", "experience delivery", "euc",
-        "principal architect", "principal solutions owner", "experience",
-        "modern workplace", "service desk", "architecture"
+        "architecture", "architect"
     ],
     ("Delivery", "Manager"): [
-        "architecture", "experience delivery", "euc",
-        "principal architect", "principal solutions owner", "experience",
-        "modern workplace", "service desk", "architecture"
+        "architecture", "architect"
     ],
+    ("Delivery", "Entry Level"): [
+        "architecture", "architect", "owner"
+    ],
+
 }
 
 def normalize_job_level(raw_level) -> str:
