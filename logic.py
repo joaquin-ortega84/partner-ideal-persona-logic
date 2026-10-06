@@ -22,10 +22,10 @@ Manager, Entry Level (Individual Contributor)
 Qualifying levels per persona
 ------------------------------
   Strategy & Alliance : Executive, Vice President, Senior Director,
-                          Director
+                          Director, Senior Manager, Manager
   Client Sales         : Executive, Vice President, Senior Director,
                           Director, Senior Manager, Manager, Entry Level
-  Delivery            : Executive, Vice President, Senior Director, Director, Entry Level
+  Delivery            : Executive, Vice President, Senior Director, Director
 
 (Adjust PERSONA_JOB_LEVELS below if any of these should be different.)
 
@@ -47,24 +47,23 @@ import pandas as pd
 PERSONA_KEYWORDS = {
     "Strategy & Alliance": [
         # Managing Director
-        "managing director", "managing director it", "managing director digital workplace",
+        "managing director", "managing director it", "managing director digital workplace", "managing partner",
         # Alliance & Partnership & Relationship & Ecosystem
         "alliance", "alliances","alianzas",
         "partnership", "partnerships", "partner development", "partner management",
-        "ecosystem partnerships", "partner ecosystem",
+        "ecosystem partnerships", "partner ecosystem", "nexthink partner", "nexthink partnership",
+        "strategic relationship", "relationship", "strategic relationship", "relationship",
         # Strategy & Offering & Portfolio
-        "managed services", "strategic relationship", "relationship", "it strategy",
-        "portfolio", "offering", "stategy and innovation"
-        # Transformation
-        "transformation", "transformacion",
+        "managed services",
+        "portfolio", "offering", "stategy and innovation", "it strategy",
         # Infrastruture
         "managed infrastructure services"
 
     ],
     "Client Sales": [
         # Account management
-        "account manager", "account management partner", "key account", "account director"
-        "strategic account", "major account", "account delivery",
+        "account manager", "account management partner", "key account", "account director",
+        "strategic account", "major account", "account delivery", "client partner",
         "account sales", "sales account", "solutions account", "gerente de cuentas",
 
         # Client management
@@ -75,15 +74,17 @@ PERSONA_KEYWORDS = {
         # Sales execution
         "account executive", "sales executive", "strategic sales", "services sales",
         "enterprise solutions sales", "large deal", "customer acquisition",
-        "ejecutivo de cuentas", "head of sales", "new business", "presales", "pre sales"
+        "ejecutivo de cuentas", "head of sales", "new business", "presales", "pre sales",
 
         # Business development
         "business development", "director comercial", "negocio",
 
-        # Solution / deal architecture
+        # Solution / deal architecture / achtiect
         "solution offering architect", "solution architect", "deal architect",
         "service architect", "chief architect", "cheif architect", "dex architect", "modern workplace architect",
-        "workplace architect", "euc architect", "it architect", "technical architect"
+        "workplace architect", "euc architect", "it architect", "technical architect",
+        "architecture", "solution architect", "enterprise architect", "chief architect",
+        "portfolio architect", "pre sales architect", "architect modern workplace", "dex architect"
     ],
 
     "Delivery": [
@@ -91,10 +92,13 @@ PERSONA_KEYWORDS = {
         # delivery director, delivery operations, delivery architect, etc.)
 
         # IT
-        "it", "information technology",
+        "it", "information technology", "it strategy",
 
         # Delivery
         "delivery",
+
+        # Transformation
+        "transformation", "transformacion",
 
         # Service management & operations
         "service management", "service desk", "it service", "itsm service",
@@ -109,9 +113,7 @@ PERSONA_KEYWORDS = {
         # Platforms & cloud
         "platform",
 
-        # Architecture
-        "architecture", "solution architect", "enterprise architect", "chief architect",
-        "portfolio architect", "pre sales architect", "architect modern workplace", "dex architect"
+
     ]
 }
 
@@ -133,7 +135,8 @@ EXCLUSION_KEYWORDS = [
     "inside sales", "junior manager", "junior executive",
     "erp", "inside",
     "merchandising",
-    "security presales", "data center", "agent", "admin", "technician", "supervisor", "coordinator", "professional", "specialist"
+    "security presales", "data center", "agent", "admin", "technician", "supervisor", "coordinator", "professional", "specialist",
+    "assistant manager", "hr transformation"
 
 ]
 
@@ -169,7 +172,7 @@ PERSONA_JOB_LEVELS = {
         "Senior Manager", "Manager", "Entry Level",
     },
     "Delivery": {
-        "Executive", "Vice President", "Senior Director", "Director", "Entry Level"
+        "Executive", "Vice President", "Senior Director", "Director"
     },
 }
 
@@ -180,17 +183,18 @@ PERSONA_JOB_LEVELS = {
 # Manager/Director+ level, but too loose at Entry Level: an Entry Level
 # "Sales Manager" or "Account Director" title shouldn't qualify unless the
 # title itself says "executive" (e.g. "Sales Executive", "Account Executive").
+
+SA_MANAGER_REQUIRED_WORDS = [
+    "alliance", "alliances", "alianzas",
+    "partnership", "partnerships", "partner development", "partner management",
+    "ecosystem partnerships", "partner ecosystem", "nexthink partner", "nexthink partnership",
+    "strategic relationship", "relationship",
+]
+
 EXTRA_TITLE_REQUIREMENT = {
     ("Client Sales", "Entry Level"): ["executive", "exec"],
-    ("Delivery", "Senior Manager"): [
-        "architecture", "architect"
-    ],
-    ("Delivery", "Manager"): [
-        "architecture", "architect"
-    ],
-    ("Delivery", "Entry Level"): [
-        "architecture", "architect", "owner"
-    ],
+    ("Strategy & Alliance", "Senior Manager"): SA_MANAGER_REQUIRED_WORDS,
+    ("Strategy & Alliance", "Manager"): SA_MANAGER_REQUIRED_WORDS,
 
 }
 
