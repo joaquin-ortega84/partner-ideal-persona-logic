@@ -46,16 +46,23 @@ import pandas as pd
 
 PERSONA_KEYWORDS = {
     "Strategy & Alliance": [
+        # C-level
+        "ceo", "cto", "chief executive office", "chief information officer", "chief technology officer",
+        "ciso", "cio", "chief security officer", "cso", "cco", "chief commercial officer",
+        "cfo", "chief financial officer", "coo", "chief operating officer",
+
+        # General manager
+        "general manager services", "general manager it", "general manager digital workplace",
         # Managing Director
         "managing director", "managing director it", "managing director digital workplace", "managing partner",
         # Alliance & Partnership & Relationship & Ecosystem
-        "alliance", "alliances","alianzas",
+        "alliance", "alliances","alianzas", "partners",
         "partnership", "partnerships", "partner development", "partner management",
         "ecosystem partnerships", "partner ecosystem", "nexthink partner", "nexthink partnership",
         "strategic relationship", "relationship", "strategic relationship", "relationship",
         # Strategy & Offering & Portfolio
         "managed services",
-        "portfolio", "offering", "stategy and innovation", "it strategy",
+        "portfolio", "offering", "stategy and innovation", "it strategy", "enterprise solutions",
         # Infrastruture
         "managed infrastructure services"
 
@@ -74,10 +81,13 @@ PERSONA_KEYWORDS = {
         # Sales execution
         "account executive", "sales executive", "strategic sales", "services sales",
         "enterprise solutions sales", "large deal", "customer acquisition",
-        "ejecutivo de cuentas", "head of sales", "new business", "presales", "pre sales",
+        "ejecutivo de cuentas", "head of sales", "new business", "presales", "pre sales", "pre-sales",
 
         # Business development
         "business development", "director comercial", "negocio",
+
+        # Other languages
+        "commericial", "commerciales",
 
         # Solution / deal architecture / achtiect
         "solution offering architect", "solution architect", "deal architect",
@@ -85,6 +95,7 @@ PERSONA_KEYWORDS = {
         "workplace architect", "euc architect", "it architect", "technical architect",
         "architecture", "solution architect", "enterprise architect", "chief architect",
         "portfolio architect", "pre sales architect", "architect modern workplace", "dex architect"
+        "account cto",
     ],
 
     "Delivery": [
@@ -92,23 +103,23 @@ PERSONA_KEYWORDS = {
         # delivery director, delivery operations, delivery architect, etc.)
 
         # IT
-        "it", "information technology", "it strategy",
-
-        # Delivery
-        "delivery",
+        "it", "information technology", "it strategy", "information systems",
 
         # Transformation
-        "transformation", "transformacion",
+        "transformation", "transformacion", "infrastructure", "intelligent automation", "xmo", "innovation", "technology", "application",
 
-        # Service management & operations
+        # Service management & operations & delibery
         "service management", "service desk", "it service", "itsm service",
         "solution service", "services and solution", "operational excellence", "global services", "global service", "service delivery",
         "dsi", "informatique",
+        "delivery", "application services", "support services", "it support",
+
 
         # Workplace / end user
         "end user services", "workplace services", "digital workplace", "workspace", "end point", "endpoint",
         "end user devices", "end user computing", "digital experience", "workplace", "dex", "euc", "eus", "compute", "computing",
-        "eux", "dwp", "dws", "employee experience", "user experience", "post de travail",
+        "eux", "dwp", "dws", "employee experience", "user experience", "post de travail", "service desks", "experience management",
+
 
         # Platforms & cloud
         "platform",
@@ -118,7 +129,7 @@ PERSONA_KEYWORDS = {
 }
 
 # Priority used when a title matches keywords for more than one persona.
-PERSONA_PRIORITY = ["Strategy & Alliance", "Client Sales", "Delivery"]
+PERSONA_PRIORITY = ["Client Sales", "Strategy & Alliance", "Delivery"]
 
 # Titles containing any of these phrases are never tagged as an Ideal
 # Persona, regardless of persona keyword / job level matches (e.g. an
@@ -136,7 +147,7 @@ EXCLUSION_KEYWORDS = [
     "erp", "inside",
     "merchandising",
     "security presales", "data center", "agent", "admin", "technician", "supervisor", "coordinator", "professional", "specialist",
-    "assistant manager", "hr transformation"
+    "assistant manager", "hr transformation", "cyber security", "engineer", "analyst"
 
 ]
 
@@ -185,10 +196,10 @@ PERSONA_JOB_LEVELS = {
 # title itself says "executive" (e.g. "Sales Executive", "Account Executive").
 
 SA_MANAGER_REQUIRED_WORDS = [
-    "alliance", "alliances", "alianzas",
+    "alliance", "alliances", "alianzas", "partners",
     "partnership", "partnerships", "partner development", "partner management",
     "ecosystem partnerships", "partner ecosystem", "nexthink partner", "nexthink partnership",
-    "strategic relationship", "relationship",
+    "strategic relationship", "relationship", "account cto"
 ]
 
 EXTRA_TITLE_REQUIREMENT = {
