@@ -37,7 +37,7 @@ Qualifying levels per persona
 
 Usage
 -----
-    python logic.py input.xlsx output.csv \
+    python new_logic.py input.xlsx output.csv \
         --title-col Title --level-col "Job Level"
 """
 
@@ -53,25 +53,22 @@ import pandas as pd
 PERSONA_KEYWORDS = {
     "IT Leadership": [
         # C-suite
-        "ceo", "cto", "chief executive office", "chief information officer", "chief technology officer",
+        "ceo", "cto", "chief executive officer", "chief information officer", "chief technology officer",
         "ciso", "cio", "chief security officer", "cso", "cco", "chief commercial officer",
-        "cfo", "chief financial officer", "coo", "chief operating officer",
-
+        "cfo", "chief financial officer", "coo", "chief operating officer", "chief information security officer",
+        "chief product officer", "cpo", "chief services officer", "chief strategy officer", "chief digital officer",
         # General & managing leadership
         "general manager services", "general manager it", "general manager digital workplace",
         "managing director", "managing director it", "managing director digital workplace", "managing partner",
-
         # IT & information systems
-        "it", "information technology", "information systems", "technology", "dsi", "informatique", "architecture",
-
+        "it", "information technology", "information systems", "technology", "dsi", "informatique", "architecture", "itsm",
         # Strategy
         "it strategy", "stategy and innovation", "it strategy",
-
         # Transformation & innovation
-        "transformation", "transformacion", "innovation", "intelligent automation", "xmo",
-
+        "transformation", "transformacion", "innovation", "intelligent automation", "xmo", "modernization"
         # Managed services & infrastructure
         "managed services", "managed infrastructure services", "infrastructure",
+        "geschäftsführer", "geschaftsfuhrer"
     ],
 
     "DEX Leadership": [
@@ -79,13 +76,23 @@ PERSONA_KEYWORDS = {
         "digital workplace", "workplace", "workplace services", "workspace", "dwp", "dws",
         "end user services", "end user computing", "end user devices", "eus",
         "endpoint", "end point", "euc", "compute", "computing", "post de travail",
-        "dex", "digital experience", "employee experience", "user experience", "eux", "experience management",
+        "dex", "digital experience", "employee experience", "user experience", "eux", "experience management", "poste de travail",
+        "service desk", "desktop", "desktops"
+    ],
+
+    "DEX Managers": [
+        # Digital workplace, end user & employee experience
+        "digital workplace", "workplace", "workplace services", "workspace", "dwp", "dws",
+        "end user services", "end user computing", "end user devices", "eus", "dx", "dxp",
+        "endpoint", "end point", "euc", "compute", "computing", "post de travail",
+        "dex", "digital experience", "employee experience", "user experience", "eux", "experience management", "poste de travail",
+        "service desk", "desktop", "desktops",
     ],
 
     "Alliance & Partnerships": [
         # Alliances & partnerships
         "alliance", "alliances", "alianzas", "partners",
-        "partnership", "partnerships", "partner development", "partner management",
+        "partnership", "partnerships", "partner development", "partner management", "partneships",
 
         # Ecosystem & Nexthink-specific
         "ecosystem partnerships", "partner ecosystem", "nexthink partner", "nexthink partnership",
@@ -96,16 +103,17 @@ PERSONA_KEYWORDS = {
 
     "Offering & Portfolio": [
         # Portfolio & offering
-        "portfolio", "offering", "enterprise solutions",
+        "portfolio", "offering", "enterprise solutions", "portfolios"
     ],
 
     "Senior Service Delivery": [
         # Delivery & operations
         "delivery", "service delivery", "global services", "global service",
-        "operational excellence", "solution service", "services and solution",
+        "operational excellence", "solution service", "services and solution", "service excellence", "operational excellence",
+        "observability",
 
         # Service management & support
-        "service management", "service desk", "service desks", "it service", "itsm service",
+        "service management", "service desk", "service desks", "it service", "itsm service", "servicedesk",
         "it support", "support services",
 
         # Applications
@@ -117,43 +125,37 @@ PERSONA_KEYWORDS = {
         "account manager", "account management partner", "key account", "account director",
         "strategic account", "major account", "account delivery",
         "account sales", "sales account", "solutions account",
-
         # Client management
         "client partner", "client executive", "client director", "client partner", "client management",
         "client experience executive", "client relationship", "client services",
-        "client solutions", "strategic client",
-
+        "client solutions", "strategic client", "strategic clients",
         # Sales execution
         "account executive", "sales executive", "head of sales", "strategic sales", "services sales",
         "enterprise solutions sales", "large deal",
-
-        # New business
+        # New business & business development
         "business development", "new business", "customer acquisition",
-
         # Pre-sales
         "presales", "pre sales", "pre-sales",
-
         # Non-English
         "gerente de cuentas", "ejecutivo de cuentas", "director comercial", "negocio",
-        "commericial", "commerciales",
-
+        "commericial", "commerciales", "commerciale",
         # Account technical leadership
-        "account cto",
+        "account cto", "technical sales",
     ],
 
     "Architects": [
         # Pre-sales & solution architects
         "solution architect", "solution offering architect", "deal architect", "pre sales architect",
-        "solution architect",
-
+        "solutions architect",
         # Portfolio & chief architects
         "chief architect", "cheif architect", "enterprise architect", "portfolio architect",
-        "architecture", "chief architect",
-
+        "architecture", "chief architect", "chief enterprise architect",
         # Domain & technical architects
         "euc architect", "dex architect", "workplace architect", "modern workplace architect",
         "architect modern workplace", "it architect", "technical architect", "service architect",
         "dex architect",
+        # Architecture managers
+        "architecture"
     ],
 }
 
@@ -166,6 +168,7 @@ PERSONA_PRIORITY = [
     "Alliance & Partnerships",
     "Offering & Portfolio",
     "DEX Leadership",
+    "DEX Managers",
     "Senior Service Delivery",
     "IT Leadership",
 ]
@@ -174,10 +177,13 @@ PERSONA_PRIORITY = [
 # Persona, regardless of persona keyword / job level matches (e.g. an
 # "Assistant to the VP of Sales" is not the VP of Sales).
 EXCLUSION_KEYWORDS = [
+    "intern",
+    "supply chain",
     "assistant to",
     "assistant of",
     "ea to",
     "executive assistant",
+    "assistant director",
     "sales operations",
     "financial services",
     "sales & markeing", "sales and marketing", "customer success",
@@ -217,6 +223,7 @@ DIRECTOR_AND_ABOVE = {"Executive", "Vice President", "Senior Director", "Directo
 PERSONA_JOB_LEVELS = {
     "IT Leadership": DIRECTOR_AND_ABOVE,
     "DEX Leadership": DIRECTOR_AND_ABOVE,
+    "DEX Managers": {"Senior Manager", "Manager"},
     "Alliance & Partnerships": DIRECTOR_AND_ABOVE | {"Senior Manager", "Manager"},
     "Offering & Portfolio": DIRECTOR_AND_ABOVE,
     "Senior Service Delivery": DIRECTOR_AND_ABOVE,
@@ -291,7 +298,7 @@ def title_contains_word(title, word: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# 4. Core tagging logic
+# 4. Core tagging new_logic
 # ---------------------------------------------------------------------------
 
 
@@ -348,6 +355,7 @@ def process_file(input_path: str, output_path: str, title_col: str, level_col: s
         df = pd.read_csv(input_path)
 
     df = tag_dataframe(df, title_col, level_col, id_col)
+    df = df[df[title_col].notna() & (df[title_col].astype(str).str.strip() != "")]
 
     if not output_path.lower().endswith(".csv"):
         output_path = output_path.rsplit(".", 1)[0] + ".csv"
@@ -372,7 +380,7 @@ def main():
     args = parser.parse_args()
 
     if not args.input_file or not args.output_file:
-        print("Usage: python logic.py input.xlsx output.csv", file=sys.stderr)
+        print("Usage: python new_logic.py input.xlsx output.csv", file=sys.stderr)
         sys.exit(1)
 
     process_file(args.input_file, args.output_file, args.title_col, args.level_col, args.id_col)

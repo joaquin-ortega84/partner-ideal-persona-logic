@@ -1,8 +1,8 @@
 import pandas as pd
 
-base = '/mnt/c/Users/jortega/code/partner-ideal-persona-logic'
-leads = pd.read_csv(f'{base}/partner_leads.csv')
-contacts = pd.read_csv(f'{base}/partner_contacts.csv')
+base = '/mnt/c/Users/jortega/code/partner-ideal-persona-logic/raw_data'
+leads = pd.read_csv(f'{base}/partner type leads.csv')
+contacts = pd.read_csv(f'{base}/partner type contacts.csv')
 
 leads.rename(columns={'Company / Account':'Account Name'}, inplace=True)
 leads.rename(columns={'Lead ID':'Related Record ID'}, inplace=True)
@@ -21,12 +21,12 @@ data['Full Name'] = (
 data.drop(columns=["First Name", "Last Name"], inplace=True)
 
 # data = data[["Full Name", "Title", "Job Level","Account Name","Target Account",\
-#              "Account Type","Automated Persona Match","Ideal Persona","Account Owner","Lead Owner","lead/contact","Email","Related Record ID"]]
+#              "Account Type","Automated Persona Match","Ideal Persona","Account Owner","Lead Owner","lead/contact","Email","Related Record ID", 'Create Date']]
 
-data = data[['Title', 'Job Level', "lead/contact", 'Related Record ID']]
+data = data[['Title', 'Job Level', 'Automated Persona Match', 'Account Type', 'lead/contact', 'Create Date', 'Related Record ID']]
 
 # Quick sanity checks
 print(data['lead/contact'].value_counts())
 print(data.shape)
 
-data.to_csv('people.csv', index=None)
+data.to_csv('partner_type_people.csv', index=None)
