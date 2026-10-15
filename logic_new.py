@@ -68,7 +68,7 @@ PERSONA_KEYWORDS = {
         "transformation", "transformacion", "innovation", "intelligent automation", "xmo", "modernization"
         # Managed services & infrastructure
         "managed services", "managed infrastructure services", "infrastructure",
-        "geschäftsführer", "geschaftsfuhrer"
+        "geschäftsführer", "geschaftsfuhrer", "strategic tooling", "observability",
     ],
 
     "DEX Leadership": [
@@ -77,7 +77,7 @@ PERSONA_KEYWORDS = {
         "end user services", "end user computing", "end user devices", "eus",
         "endpoint", "end point", "euc", "compute", "computing", "post de travail",
         "dex", "digital experience", "employee experience", "user experience", "eux", "experience management", "poste de travail",
-        "service desk", "desktop", "desktops"
+        "service desk", "desktop", "desktops", "workforce solution",
     ],
 
     "DEX Managers": [
@@ -86,7 +86,7 @@ PERSONA_KEYWORDS = {
         "end user services", "end user computing", "end user devices", "eus", "dx", "dxp",
         "endpoint", "end point", "euc", "compute", "computing", "post de travail",
         "dex", "digital experience", "employee experience", "user experience", "eux", "experience management", "poste de travail",
-        "service desk", "desktop", "desktops",
+        "service desk", "desktop", "desktops", "workforce solutions",
     ],
 
     "Alliance & Partnerships": [
