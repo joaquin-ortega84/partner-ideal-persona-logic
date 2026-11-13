@@ -529,7 +529,7 @@ def process_file(input_path: str, output_path: str, title_col: str, level_col: s
 
     df = df.drop_duplicates()
 
-    df.to_csv(output_path, index=False)
+    df.to_csv(output_path, index=False, encoding='utf-8-sig')
 
     total = len(df)
     tagged = int(df["Partner Ideal Persona"].sum())

@@ -87,6 +87,7 @@ PERSONA_KEYWORDS = {
         "endpoint", "end point", "euc", "compute", "computing", "post de travail",
         "dex", "digital experience", "employee experience", "user experience", "eux", "experience management", "poste de travail",
         "service desk", "desktop", "desktops", "workforce solutions",
+
     ],
 
     "Alliance & Partnerships": [
@@ -359,6 +360,8 @@ def process_file(input_path: str, output_path: str, title_col: str, level_col: s
 
     if not output_path.lower().endswith(".csv"):
         output_path = output_path.rsplit(".", 1)[0] + ".csv"
+
+    df = df[['Full Name']]
 
     df.to_csv(output_path, index=False)
 
