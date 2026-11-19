@@ -542,8 +542,8 @@ def main():
     parser = argparse.ArgumentParser(description="Tag contacts with the Partner Ideal Persona model.")
     parser.add_argument("input_file", nargs="?", help="Path to input .xlsx or .csv")
     parser.add_argument("output_file", nargs="?", help="Path to write tagged output (always CSV)")
-    parser.add_argument("--title-col", default="CM Title")
-    parser.add_argument("--level-col", default="LeadorContact.Job_Level")
+    parser.add_argument("--title-col", default="Title")
+    parser.add_argument("--level-col", default="Job_Level")
     parser.add_argument("--id-col", default="Lead or Contact ID",
                          help="Column after which Persona Type / Partner Ideal Persona are inserted")
     parser.add_argument("--region-col", default="Activity Region L2",

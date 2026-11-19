@@ -55,15 +55,16 @@ PERSONA_KEYWORDS = {
         # C-suite
         "ceo", "cto", "chief executive officer", "chief information officer", "chief technology officer",
         "ciso", "cio", "chief security officer", "cso", "cco", "chief commercial officer",
+        "chief revenue officer", "chief experience officer", "chief growth officer",
         "cfo", "chief financial officer", "coo", "chief operating officer", "chief information security officer",
         "chief product officer", "cpo", "chief services officer", "chief strategy officer", "chief digital officer",
         # General & managing leadership
-        "general manager services", "general manager it", "general manager digital workplace",
+        "general manager services", "general manager", "general manager it", "general manager digital workplace",
         "managing director", "managing director it", "managing director digital workplace", "managing partner",
         # IT & information systems
         "it", "information technology", "information systems", "technology", "dsi", "informatique", "architecture", "itsm",
         # Strategy
-        "it strategy", "stategy and innovation", "it strategy",
+        "it strategy", "stategy and innovation", "it strategy","digital strategy",
         # Transformation & innovation
         "transformation", "transformacion", "innovation", "intelligent automation", "xmo", "modernization"
         # Managed services & infrastructure
@@ -77,7 +78,7 @@ PERSONA_KEYWORDS = {
         "end user services", "end user computing", "end user devices", "eus",
         "endpoint", "end point", "euc", "compute", "computing", "post de travail",
         "dex", "digital experience", "employee experience", "user experience", "eux", "experience management", "poste de travail",
-        "service desk", "desktop", "desktops", "workforce solution",
+        "service desk", "desktop", "desktops", "workforce solution","dx","digital promotion"
     ],
 
     "DEX Managers": [
@@ -86,7 +87,7 @@ PERSONA_KEYWORDS = {
         "end user services", "end user computing", "end user devices", "eus", "dx", "dxp",
         "endpoint", "end point", "euc", "compute", "computing", "post de travail",
         "dex", "digital experience", "employee experience", "user experience", "eux", "experience management", "poste de travail",
-        "service desk", "desktop", "desktops", "workforce solutions",
+        "service desk", "desktop", "desktops", "workforce solutions","dx","digital promotion"
 
     ],
 
@@ -360,8 +361,6 @@ def process_file(input_path: str, output_path: str, title_col: str, level_col: s
 
     if not output_path.lower().endswith(".csv"):
         output_path = output_path.rsplit(".", 1)[0] + ".csv"
-
-    df = df[['Full Name']]
 
     df.to_csv(output_path, index=False)
 

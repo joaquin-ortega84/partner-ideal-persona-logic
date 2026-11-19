@@ -1,8 +1,8 @@
 import pandas as pd
 
-base = '/mnt/c/Users/jortega/code/partner-ideal-persona-logic/raw_data'
-leads = pd.read_csv(f'{base}/partner type leads.csv')
-contacts = pd.read_csv(f'{base}/partner type contacts.csv')
+base = '/mnt/c/Users/jortega/code/partner-ideal-persona-logic/for full db update/raw_data'
+leads = pd.read_csv(f'{base}/partner_leads.csv')
+contacts = pd.read_csv(f'{base}/partner_contacts.csv')
 
 leads.rename(columns={'Company / Account':'Account Name'}, inplace=True)
 leads.rename(columns={'Lead ID':'Related Record ID'}, inplace=True)
